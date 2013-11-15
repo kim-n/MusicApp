@@ -1,0 +1,15 @@
+<% action_path = @band.persisted? ? bands_path : bands_path %>
+
+<form action='/bands' method= 'post'>
+
+  <% if @band.persisted? %>
+    <input type="hidden" name="_method" value= "put">
+  <% end %>
+
+
+  <label for='band_name'>Band Name</label>
+  <input  type="text" id='band_name' name='band[band_name]' value="<%= @band.band_name%>">
+
+  <input type="submit" value="Create Band!">
+
+</form>

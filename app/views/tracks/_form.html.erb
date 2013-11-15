@@ -1,0 +1,36 @@
+<% action_path = @track.persisted? ? album_track_path : album_tracks_path %>
+
+<form action='<%= action_path %>' method= "post">
+
+  <% if @track.persisted? %>
+    <input type="hidden" name="_method" value= "put">
+  <% end %>
+
+  <label for="track_album">Album</label>
+  <select name=track[album_id] id="track_album">
+    <% Album.all.each do |album| %>
+      <option value="<%= album.id %>" <%= "selected" if (album.id == params[:album_id].to_i) %> >
+        <%= album.album_name %>
+      </option>
+    <% end %>
+  </select>
+  <p>
+
+  <label for="track_name">Track Name</label>
+  <input  type="text" id="track_name" name="track[track_name]" value="<%= @track.track_name%>" >
+  <p>
+
+  <input type="radio" name="track[track_type]" id="track_type" value ="regular"
+  <%= "checked" if @track.track_type == "regular" %> <%= "checked" if @track.track_type == "regular" %> >
+  <label for="track_type">Regular</label>
+  <input type="radio" name="track[track_type]" id="track_type" value ="bonus" <%= "checked" if @track.track_type == "bonus" %> >
+  <label for="track_type">Bonus</label>
+  <p>
+
+  <label for="track_lyrics">Lyrics</label>
+  <textarea id="track_lyrics" name="track[lyrics]" >
+    <%= @track.lyrics%>
+  </textarea>
+  <input type="submit" value="Create Track!">
+
+</form>
