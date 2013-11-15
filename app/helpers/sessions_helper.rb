@@ -14,8 +14,12 @@ module SessionsHelper
   end
 
   def sign_in(user)
-    @current_user = user
-    session[:token] = user.session_token
+    if user.activated?
+      @current_user = user
+      session[:token] = user.session_token
+    else
+      redirect_to new_sessions_url
+    end
   end
 
   def sign_out_current_user

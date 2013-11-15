@@ -1,5 +1,9 @@
 MusicApp::Application.routes.draw do
-  resources :users
+  resources :users do
+    collection do
+      get 'activate'
+    end
+  end
   resource :sessions
 
   resources :bands do
