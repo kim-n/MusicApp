@@ -1,0 +1,6 @@
+<%= button_to "Delete Track", track_url, :method => :delete%>
+
+
+<h2><%= @track.track_name %></h2>
+<h3><%= link_to @track.album.album_name, album_url(@track.album) %></h3><p>
+<h3><%= link_to @track.album.band.band_name, band_url(@track.album.band) %></h3><p>
