@@ -3,7 +3,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   attr_accessible :email, :password
 
-  validates :email, :password, :session_token, :presence => true
+  validates :email, :password_digest, :session_token, :presence => true
 
   before_validation :ensure_session_token
 
@@ -17,7 +17,9 @@ class User < ActiveRecord::Base
 
   def self.find_by_credentials(email, secret)
     user = User.find_by_email(email)
-    user.password_digest.is_password?(secret) unless user.nil?
+    return if user.nil?
+    BCrypt::Password.new(user.password_digest).is_password?(secret) ? user : nil
+
   end
 
   def reset_session_token!
@@ -25,10 +27,8 @@ class User < ActiveRecord::Base
     self.save!
   end
 
-
-
   def password=(secret)
-    self.password_digest = BCrypt::Password.create(secret)
+    self.password_digest = BCrypt::Password.create(secret) unless secret.blank?
   end
 
   def is_password?(secret)
