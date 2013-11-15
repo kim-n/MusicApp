@@ -4,3 +4,13 @@
 <h2><%= @track.track_name %></h2>
 <h3><%= link_to @track.album.album_name, album_url(@track.album) %></h3><p>
 <h3><%= link_to @track.album.band.band_name, band_url(@track.album.band) %></h3><p>
+  <% if logged_in? %>
+    <%= render "note" %>
+  <% end %>
+
+<% @track.notes.each do |note| %>
+
+  <%= note.author.email %>
+  <%= note.contents %><br>
+  <%= button_to "delete", note_url(note), :method => :delete %>
+<% end %>

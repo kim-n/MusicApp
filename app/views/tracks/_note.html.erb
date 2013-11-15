@@ -1,0 +1,17 @@
+<form action='<%=notes_url%>' method= "post">
+
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
+  <p>
+  <label for="note_contents">Leave Note</label><br>
+  <textarea id="note_contents" name="note[contents]" ></textarea>
+  <name="key" value="value">
+  <p>
+
+  <input type="hidden" name="note[user_id]" value= "<%= current_user.id %>">
+  <input type="hidden" name="note[track_id]" value= "<%= params[:id] %>">
+  <input type="submit" value="Create Note">
+
+</form>

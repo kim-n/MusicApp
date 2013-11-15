@@ -7,6 +7,13 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_session_token
 
+  has_many(
+    :notes,
+    :class_name => "Note",
+    :foreign_key => :user_id,
+    :primary_key => :id
+  )
+
   def ensure_session_token
     self.session_token ||= User.generate_session_token
   end

@@ -2,6 +2,10 @@
 
 <form action='<%= action_path %>' method= "post">
 
+  <input type="hidden"
+         name="authenticity_token"
+         value="<%= form_authenticity_token %>">
+
   <% if @album.persisted? %>
     <input type="hidden" name="_method" value= "put">
 <% end %>

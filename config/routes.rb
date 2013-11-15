@@ -6,9 +6,10 @@ MusicApp::Application.routes.draw do
     resources :albums, :only => [:index, :new, :create, :edit, :update]
   end
   resources :albums, :only => [:show, :destroy] do
-    resources :tracks , :only => [:index, :new, :create, :edit, :update]
+    resources :tracks, :only => [:index, :new, :create, :edit, :update]
   end
   resources :tracks, :only => [:show, :destroy]
+  resources :notes, :only => [:create, :destroy]
 
 
   # The priority is based upon order of creation:
